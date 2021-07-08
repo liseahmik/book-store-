@@ -1,0 +1,138 @@
+CREATE TABLE `auth` (
+  `userid` varchar(50) DEFAULT NULL,
+  `auth` varchar(50) DEFAULT NULL,
+  KEY `authorities_FK` (`userid`),
+  CONSTRAINT `authorities_FK` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` varchar(50) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `regdate` datetime NOT NULL,
+  PRIMARY KEY (`cart_id`,`userid`),
+  UNIQUE KEY `userid` (`userid`,`product_id`),
+  KEY `cart_fk2` (`product_id`),
+  CONSTRAINT `cart_fk1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`),
+  CONSTRAINT `cart_fk2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+)
+
+CREATE TABLE `category` (
+  `category_name` varchar(50) NOT NULL,
+  `category_code` varchar(30)NOT NULL,
+  `category_codeRef` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`category_code`),
+  KEY `category_codeRef` (`category_codeRef`),
+  CONSTRAINT `category_ibfk_1` FOREIGN KEY (`category_codeRef`) REFERENCES `category` (`category_code`)
+)
+
+CREATE TABLE `fav` (
+  `fav_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `userid` varchar(50)  NOT NULL,
+  PRIMARY KEY (`fav_id`),
+  UNIQUE KEY `userid` (`userid`,`product_id`),
+  KEY `fav_fk_idx` (`product_id`),
+  CONSTRAINT `fav_fk` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+
+CREATE TABLE `order` (
+  `order_id` varchar(50) NOT NULL,
+  `userid` varchar(50)  NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT '배송준비',
+  `order_name` varchar(30) NOT NULL,
+  `order_addr1` varchar(20)  NOT NULL,
+  `order_addr2` varchar(50) NOT NULL,
+  `order_addr3` varchar(50) NOT NULL,
+  `order_phone` varchar(30) NOT NULL,
+  `total_amount` int(11) NOT NULL,
+  `payment` varchar(30) NOT NULL,
+  `order_date` date NOT NULL,
+  `order_title` varchar(500) DEFAULT NULL,
+  `tracking` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `order_FK_1` (`userid`),
+  CONSTRAINT `order_FK_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+CREATE TABLE `order_details` (
+  `details_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` varchar(50) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  PRIMARY KEY (`details_id`),
+  KEY `order_id` (`order_id`),
+  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`)
+)
+
+CREATE TABLE `product` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(200) NOT NULL,
+  `product_price` int(11) NOT NULL,
+  `product_des` varchar(2000) NOT NULL,
+  `product_img` varchar(200) DEFAULT NULL,
+  `product_pages` varchar(50) NOT NULL,
+  `product_isbn` varchar(50) NOT NULL,
+  `product_writer` varchar(50) DEFAULT NULL,
+  `sales` int(11) DEFAULT '0',
+  `category_code` varchar(30) NOT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `PRODUCT_FK` (`category_code`),
+  CONSTRAINT `PRODUCT_FK` FOREIGN KEY (`category_code`) REFERENCES `category` (`category_code`)
+)
+
+CREATE TABLE `qna_comment` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(500) DEFAULT NULL,
+  `regdate` datetime DEFAULT NULL,
+  `board_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `board_fk_idx` (`board_id`),
+  CONSTRAINT `qnaboard_fk` FOREIGN KEY (`board_id`) REFERENCES `qnaboard` (`board_id`)
+) 
+
+CREATE TABLE `qnaboard` (
+  `board_id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` varchar(20) DEFAULT NULL,
+  `subject` varchar(50) DEFAULT NULL,
+  `content` varchar(2000) DEFAULT NULL,
+  `regdate` date DEFAULT NULL,
+  `status` varchar(45) DEFAULT '답변대기',
+  PRIMARY KEY (`board_id`),
+  KEY `BOARD_FK` (`userid`),
+  CONSTRAINT `BOARD_FK` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`)
+)
+
+CREATE TABLE `review` (
+  `review_id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(500) DEFAULT NULL,
+  `regdate` datetime DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `profile` varchar(45) DEFAULT NULL,
+  `userid` varchar(50) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  PRIMARY KEY (`review_id`),
+  UNIQUE KEY `userid` (`userid`,`product_id`),
+  KEY `review_FK_idx` (`product_id`),
+  KEY `review_FK2` (`userid`),
+  CONSTRAINT `review_FK` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `review_FK2` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`)
+)
+
+CREATE TABLE `users` (
+  `userid` varchar(50) NOT NULL,
+  `userpass` varchar(100) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `userphone` varchar(30) DEFAULT NULL,
+  `useremail` varchar(100) DEFAULT NULL,
+  `useraddr1` varchar(20) DEFAULT NULL,
+  `useraddr2` varchar(50) DEFAULT NULL,
+  `useraddr3` varchar(50) DEFAULT NULL,
+  `regdate` date DEFAULT NULL,
+  `profile` varchar(50) DEFAULT NULL,
+  `grade` varchar(45) DEFAULT 'bronze',
+  `mileage` int(11) DEFAULT '0',
+  PRIMARY KEY (`userid`)
+) 
+
