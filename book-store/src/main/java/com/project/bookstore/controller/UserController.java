@@ -3,26 +3,32 @@ package com.project.bookstore.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequestMapping("/user/*")
 @Controller
-public class HomeController {
+public class UserController {
 	
-	@GetMapping("/")
-	public String home() {
-		return "home";
+	
+	@GetMapping("register")
+	public String register() {
+		return "user/register";
 	}
+	
 	@GetMapping("jusoPopup")
 	public String jusoPopup() {
-		return "jusoPopup";
+		return "user/jusoPopup";
 	}
+	
 	@PostMapping("jusoPopup")
 	public String jusoPopup2() {
-		return "jusoPopup";
+		return "user/jusoPopup";
 	}
-
+	
 	@GetMapping("Sample")
 	public String Sample() {
-		return "Sample";
+		return "user/Sample";
 	}
-
+	
+	
 }
