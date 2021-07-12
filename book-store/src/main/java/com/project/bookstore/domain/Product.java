@@ -1,10 +1,9 @@
 package com.project.bookstore.domain;
 
-import java.sql.Blob;
-import java.sql.Clob;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.hibernate.type.BlobType;
-
 import lombok.Data;
 
 @Entity( name =  "tbl_product")
@@ -24,12 +21,13 @@ public class Product {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productNo;
-	
+	@Column(nullable = false)
 	private String productName;
+	@Column(nullable = false)
 	private int productPrice;
 	
 	private Date productDate;
-	private Date salesRate;
+	private int salesRate;
 	
 	private String writer;
 	private String image;

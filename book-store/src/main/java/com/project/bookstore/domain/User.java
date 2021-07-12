@@ -22,15 +22,18 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private int userNo;
-	@Column(nullable = false)
+
 	private String phone;
-	@Column(nullable = false)
 	private String email;
 	@Column(nullable = false)
 	private String username;
 	@Column(nullable = false)
+	private String password;
 	private String addr;
 	private int couponNo;
+	
+	private String role;
+	private String name;
 	
 	@CreationTimestamp
 	private Date regdate;

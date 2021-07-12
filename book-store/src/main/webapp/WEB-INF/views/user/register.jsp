@@ -16,11 +16,15 @@
 
 	<div class="container">
 		<h1>회원가입</h1>
-
+		
+	<input hidden="coupon_no" id="coupon_no" name="coupon_no">
+	<input hidden="userNo" id="userNo" name="userNo">
+	
 		<div class="form-group">
 			<label for="username">ID</label>
-			<input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
-			<button type="button" class="btn btn-primary">중복확인</button>
+			<input type="text" class="form-control" id="username" placeholder="Enter username" name="username" >
+			<button  id="duplicate_check" type="button" class="btn btn-primary" onclick="check()">중복확인</button>
+			<span class="helper-text" id="idDupMessage">*아이디는 필수 입력 항목입니다.</span>
 		</div>
 
 
@@ -37,9 +41,14 @@
 		
 		<p id="pwCheckF" style="color: #FF6600; margin: 0;"></p>
 		<p id="pwCheckFF" style="color: #FF6600; margin: 0;"></p>
-
+		
 		<div class="form-group">
-			<label for="username">Phone</label>
+			<label for="name">Name</label>
+			<input type="text" class="form-control" id="name" placeholder="Enter phone" name="name">
+		</div>
+		
+		<div class="form-group">
+			<label for="phone">Phone</label>
 			<input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
 		</div>
 
@@ -59,18 +68,85 @@
 		<button type="button" class="btn btn-primary" id="btnJoin">회원가입</button>
 
 	</div>
+	
+	
 
-	<script>
-		function goPopup() {
-			var pop = window.open("/user/jusoPopup", "pop",
-					"width=570,height=420, scrollbars=yes, resizable=yes");
+<!-- --------------------------------------------------------  -->
 
+
+
+<script>
+
+
+function check() {
+	var inputId = $("#username").val();
+	
+	if(inputId.length == 0 ) { //inputId == '' 
+		alert('아이디를 입력하세요.');
+		$('#username').focus();
+		return;
+	}
+	//window.name = "parentForm";
+	
+	$.ajax({
+		url:'/joinIdDupChk',
+		data: {id: inputId}, // 키(id):벨류(inputId)
+		method: 'GET',
+		success:function (data) {
+			console.log(typeof data);
+			console.log(data);
+			
+			if(data == "1")
+			$('#idDupMessage').html("<font color='green'> 사용가능한 아이디입니다");
+			
+			if(data == "0")
+				$('#idDupMessage').html("<font color='red'> 사용불가능한 아이디입니다");
 		}
+	});
+	
+}
 
-		function jusoCallBack(roadFullAddr) {
-			var addrEl = document.querySelector("#addr");
-			addrEl.value = roadFullAddr;
+
+
+
+
+
+
+/*  $('#username').on('keyup',function(){
+	
+	var inputId = $(this).val(); //this 이벤트를 연결한 자기자신
+	console.log(inputId); 
+	
+	if(inputId == '') {
+		$('span#idDupMessage').html('*아이디는 필수 입력 항목입니다.').css('color','grey');
+		return;
+	}
+	
+	$.ajax({
+		url:'/$joinIdDupChkJson',
+		data: {id: inputId}, // 키(id):벨류(inputId)
+		method: 'GET',
+		success:function (data) {
+			console.log(typeof data);
+			console.log(data);
+			
+			//showIdDupMessage(data.isIdDup);
 		}
+	});
+	
+}); 
+ */
+
+function goPopup() {
+	var pop = window.open("/jusoPopup", "pop",
+			"width=570,height=420, scrollbars=yes, resizable=yes");
+
+}
+
+function jusoCallBack(roadFullAddr) {
+	var addrEl = document.querySelector("#addr");
+	addrEl.value = roadFullAddr;
+}
 		
 $(document).ready(function(){
 			$('#password').keyup(function(){
@@ -88,5 +164,83 @@ $(document).ready(function(){
 			});
 		 }); 
 	</script>
+	
+<script >
+
+
+  
+  
+$("#btnJoin").click(function() {
+	
+	if($("#username").val() == "") {
+		alert("아이디를 입력하세요");
+		$("#username").focus();
+		return false;
+	}
+	
+	if($("#password").val() == "") {
+		alert("패스워드를 입력하세요");
+		$("#password").focus();
+		return false;
+	}
+	
+	if($("#email").val() == "") {
+		alert("이메일를 입력하세요");
+		$("#email").focus();
+		return false;
+	}
+	
+	if($("#name").val() == "") {
+		alert("이름을 입력하세요");
+		$("#email").focus();
+		return false;
+	}
+	
+	if($("#phone").val() == "") {
+		alert("핸드폰 번호를 입력하세요");
+		$("#email").focus();
+		return false;
+	}
+	
+	if($("#addr").val() == "") {
+		alert("주소를 넣어주세요");
+		$("#addr").focus();
+		return false;
+	}
+	
+	
+	var data = {
+			"username" : $("#username").val(),
+			"password" : $("#password").val(),
+			"email" : $("#email").val(),
+			"name" : $("#name").val(),
+			"phone" : $("#phone").val(),
+			"addr" : $("#addr").val(),
+		}
+	
+	$.ajax({
+		type : "POST",
+		url : "/register",
+		contentType: "application/json;charset=utf-8",
+		data : JSON.stringify(data)
+		
+	})
+	.done(function(resp) {
+		if(resp == "success") {
+			alert("회원가입 성공");
+			location.href="/";
+		}else if (resp == "fail") {
+			alert("아이디 중복");
+			$("#username").val("");
+		}
+			
+	})
+	.fail(function(e) {
+		alert("회원가입 실패")
+	})
+})
+
+
+</script>
 </body>
 </html>
