@@ -47,7 +47,6 @@ public class Product {
 	@Column(name = "PRIMG")
 	public byte[] imgage;
 	
-	private int discountRate;
 	@Column(length = 2000)
 	private String content;
 	private String cate;

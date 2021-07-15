@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../includes/header2.jsp"%>
+<%@ include file="../includes/header.jsp"%>
 <div class="container">
 	<form action="/login" method="post">
 		<div class="form-group">

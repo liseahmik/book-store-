@@ -1,8 +1,5 @@
 package com.project.bookstore.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +34,7 @@ public class UserController {
 			if(userrepository.findByUsername(user.getUsername())!=null)
 				return "fail";
 			userservice.registerUser(user);
+			
 			
 			return "success";
 		}

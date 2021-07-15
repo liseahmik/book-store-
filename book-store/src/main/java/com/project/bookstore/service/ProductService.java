@@ -24,10 +24,37 @@ public class ProductService {
 	}
 
 
-
-
 	public Page<Product> findByProductNameContaining(String txt, Pageable pageable) {
 		return productRepository.findByProductNameContaining(txt,pageable);
+	}
+
+	public Page<Product> findBycate(Pageable pageable) {
+		return productRepository.findBycate(pageable);
+	}
+
+	public Page<Product> findBycate2(Pageable pageable) {
+		return productRepository.findBycate2(pageable);
+	}
+
+	public long count() {
+		return productRepository.count();
+	}
+
+	public long countByCate() {
+		return productRepository.countByCate();
+	}
+
+	public int countByCate2() {
+		return productRepository.countByCate2();
+	}
+
+	public int countsel(String txt) {
+		return productRepository.countsel(txt);
+	}
+
+	public Product findById(int productNo) {
+		 Product product =	productRepository.findById(productNo).get();
+		 return product;
 	}
 
 //	public Page<Product> findAllByProductNameContaining(String txt) {

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../includes/header2.jsp"%>
+<%@ include file="../includes/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -22,23 +22,24 @@
 		
 			<thead>
 				<th>번호</th>
-				<th>제목</th>
-				<th>지은이</th>
-				<th>출판일</th>
 				<th>이미지</th>
+				<th>제목</th>
+				<th>가격</th>
+				
 
 			</thead>
 
-			<c:forEach items="${lists.content}" var="product" >
+			<c:forEach items="${lists.content}" var="product" varStatus="st">
 				<tbody>
-					<tr>	
-						<td>${product.productNo }</td>
-						<td>${product.productName} (${board.replycnt })</td>
-						<td>${product.writer}</td>
-						<td>${product.productDate }</td>
+					
+					<tr onclick="location.href='http://localhost:8866/product/detail/'+${product.productNo}">	
+						<td>${rowNo-st.index }</td>
 						<td><img src="data:image/png;base64,${product.base64}" width="100px" height="100px"> </td>
+						<td>${product.productName}</td>
+						<td>${product.productPrice }</td>
 					
 					</tr>
+					
 				</tbody>
 
 			</c:forEach>
