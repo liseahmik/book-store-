@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ include file="../includes/header.jsp"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,18 +16,28 @@
 	<h1>상품 상세페이지</h1>
 	
 	<div class="d-flex">
-	<img src="data:image/jpg;base64,${product.base64}" width="400px" height="500px">
-	
-	
+	<img src="data:image/jpg;base64,${product.base64}" width="300px" height="410px">
 	
 	<div class="container">
-	<h3>${product.productName}  </h3> <br/> 
-	<h3>판매가 : ${product.productPrice}</h3>
+	<h2>${product.productName}  </h2> 
+	<p>${product.writer }</p> <p><fmt:formatDate value="${product.productDate }" pattern="yyyy-MM-dd" /> </p> <hr/>
 	
+	<h2>판매가 : ${product.productPrice} <p>(10% 할인)</p></h2>
+	<h2>할인가 : <fmt:parseNumber value="${product.productPrice * 90/100}" integerOnly="true" /></h2> <br/> 
+	
+	<form action="/cart/list" method="post">
+	<input type="hidden" >
+	수량<input type="number" value="1" name="prate"> <br/> <br/>
+	<button type="submit" class="btn btn-primary btn-lg ">장바구니에 담기</button>
+	</form>
 	</div>
 
-
 </div>
+	<hr/>
+	<div>
+	<p>${product.content} </p> 
+
+	</div>
 </div>
 </body>
 </html>
