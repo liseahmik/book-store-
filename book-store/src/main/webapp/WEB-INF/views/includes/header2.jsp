@@ -14,12 +14,15 @@
 	<body>
 	
 		<nav class="navbar navbar-expand-sm bg-light">
+			<div class="container">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+				<li class="nav-item"><a class="nav-link" href="/product/list">test</a></li>
 				<li class="nav-item"><a class="nav-link" href="/domestic">국내도서</a></li>
 				<li class="nav-item"><a class="nav-link" href="/international">해외도서</a></li>
 				<li class="nav-item"><a class="nav-link" href="/qna">Q & A</a></li>
 				<li class="nav-item"><a class="nav-link" href="/cart">장바구니</a></li>
+				<li class="nav-item"><a class="nav-link" href="/product/insert">상품등록</a></li>
 				<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
 				<li class="nav-item"><a class="nav-link" href="/register">회원가입</a></li>
 				<li class="nav-item dropdown">
@@ -38,6 +41,7 @@
 			        </ul>
         		</li>		
 			</ul>
+			</div>
 		</nav>
 		<br>
 	

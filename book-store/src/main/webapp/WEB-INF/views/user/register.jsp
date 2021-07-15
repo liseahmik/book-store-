@@ -109,34 +109,6 @@ function check() {
 
 
 
-
-
-
-/*  $('#username').on('keyup',function(){
-	
-	var inputId = $(this).val(); //this 이벤트를 연결한 자기자신
-	console.log(inputId); 
-	
-	if(inputId == '') {
-		$('span#idDupMessage').html('*아이디는 필수 입력 항목입니다.').css('color','grey');
-		return;
-	}
-	
-	$.ajax({
-		url:'/$joinIdDupChkJson',
-		data: {id: inputId}, // 키(id):벨류(inputId)
-		method: 'GET',
-		success:function (data) {
-			console.log(typeof data);
-			console.log(data);
-			
-			//showIdDupMessage(data.isIdDup);
-		}
-	});
-	
-}); 
- */
-
 function goPopup() {
 	var pop = window.open("/jusoPopup", "pop",
 			"width=570,height=420, scrollbars=yes, resizable=yes");
@@ -227,7 +199,7 @@ $("#btnJoin").click(function() {
 	})
 	.done(function(resp) {
 		if(resp == "success") {
-			alert("회원가입 성공");
+			alert("회원가입 성공 쿠폰이 지급되었습니다.");
 			location.href="/";
 		}else if (resp == "fail") {
 			alert("아이디 중복");
