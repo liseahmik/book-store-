@@ -18,7 +18,7 @@ public class PrinpalDetatils implements UserDetails{
 	public PrinpalDetatils(User user) {
 		this.user = user;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collect = new ArrayList<GrantedAuthority>();  
@@ -61,5 +61,7 @@ public class PrinpalDetatils implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	
 
 }

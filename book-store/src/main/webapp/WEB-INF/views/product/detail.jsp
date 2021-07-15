@@ -25,9 +25,9 @@
 	<h2>판매가 : ${product.productPrice} <p>(10% 할인)</p></h2>
 	<h2>할인가 : <fmt:parseNumber value="${product.productPrice * 90/100}" integerOnly="true" /></h2> <br/> 
 	
-	<form action="/cart/list" method="post">
-	<input type="hidden" >
-	수량<input type="number" value="1" name="prate"> <br/> <br/>
+	<form action="/cart/insert" method="post">
+	<input type="hidden" name="productNo" value="${product.productNo }">
+	수량 <input type="number" value="1" name="qty"> <br/> <br/>
 	<button type="submit" class="btn btn-primary btn-lg ">장바구니에 담기</button>
 	</form>
 	</div>
