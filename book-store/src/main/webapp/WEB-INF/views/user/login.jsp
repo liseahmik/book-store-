@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
 <div class="container">
-	<form action="/login" method="post">
+	<form action="/loginProc" method="post">
 		<div class="form-group">
 			<label for="username">아이디:</label> 
 			<input type="text" class="form-control" id="username" name="username" placeholder="Enter username">

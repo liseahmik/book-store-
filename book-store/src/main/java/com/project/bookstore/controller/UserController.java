@@ -54,10 +54,16 @@ public class UserController {
 		return "user/Sample";
 	}
 	
+	//로그인
 	@GetMapping("login")
 	public String login() {
 		return "user/login";
 	} 
+	
+//	@PostMapping("login")
+//	public String login() {
+//		return "user/login";
+//	}
 	
 	@GetMapping("joinIdDupChk")
 	public @ResponseBody String joinIdDupChk(String id) {
@@ -80,21 +86,7 @@ public class UserController {
 	
 	
 	
-	
-	
-//	@GetMapping("joinIdDupChkJson")
-//	public @ResponseBody Map<String, Object> joinIdDupChkJson(User user) {
-//		// @ResponseBody애노테이션을 통해
-//		// 리턴값은 JSON문자열 형식으로 변환하여 응답을 줌
-//		int rowCount = userrepository.findByUserNo(user.getUserNo());
-//		
-//		boolean isIdDup = (rowCount == 1) ? true : false;
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("isIdDup", isIdDup);
-//		
-//		return map;
-//	}
+
 
 	
 }
