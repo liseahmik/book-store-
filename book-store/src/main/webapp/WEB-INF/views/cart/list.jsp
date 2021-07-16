@@ -10,8 +10,8 @@
 </head>
 <body>
 <div class="container">
-	<h1>장바구니</h1> <hr/> <br/><br/><br/>
-	
+	<h1>장바구니 ${cart.cartNo}</h1> <hr/> <br/><br/><br/>
+	<input type="hidden" value="${cart.cartNo}" name="cartNo">
 	<c:forEach items="${clists}" var="product" >
 		
 		<div class="d-flex">
@@ -28,7 +28,7 @@
 		<div class="ml-auto">
 		<br/><br/><br/><br/><br/>
 		<form action="#" method="post">
-			<input type="checkbox" name="cartck">
+			<button type="button" class="btn btn-primary" id="xbtn">X</button>
 		</form>
 		</div>
 		</div>
@@ -48,5 +48,24 @@
 	
 	
 </div>
+
+<script>
+$("#xbtn").click(function() {
+	if(!confirm("정말 삭제하시겠습니까?"))
+		return false;
+	$.ajax({
+		type : "DELETE",
+		url :"/cart/delete/${cart.cartNo}"
+	})
+	.done(function(resp) {
+		if(resp == "success") {
+			alert("삭제성공");
+			location.href = "/cart/list"
+		}
+	})
+})
+
+</script>
+
 </body>
 </html>

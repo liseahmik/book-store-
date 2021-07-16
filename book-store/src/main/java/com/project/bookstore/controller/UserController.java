@@ -1,7 +1,10 @@
 package com.project.bookstore.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -79,6 +82,14 @@ public class UserController {
 		
 	}
 	
+	
+	// adminpage: 회원조회
+		@GetMapping("customer")
+		public String customer(Model model) {
+			List<User> lists = userservice.customerList();
+			model.addAttribute("lists", lists);
+			return "/user/adminpage/customer";
+		}
 	
 	
 	

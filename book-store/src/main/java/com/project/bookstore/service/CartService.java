@@ -42,6 +42,15 @@ public class CartService {
 	public List<Cart> findByUserName(String id) {
 		return cartRepository.findByUserName(id);
 	}
+
+	public void delete(int id) {
+		cartRepository.deleteById(id);
+	}
+
+	public Cart findById(int num) {
+		 Cart cart = cartRepository.findById(num).get();
+		 return cart;
+	}
 	
 	
 }

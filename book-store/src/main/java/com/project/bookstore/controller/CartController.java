@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.bookstore.config.auth.PrinpalDetatils;
 import com.project.bookstore.domain.Cart;
@@ -48,6 +50,10 @@ public class CartController {
 			
 			String id = user.getUsername();
 			List<Cart> clists = cartService.findByUserName(id);
+//			int num = user.getUserNo();
+//			Cart cart2 = cartService.findById(num);
+			
+			int sum = 0;
 			
 			for(Cart cart : clists) {
 				Product product = cart.getProduct();
@@ -55,13 +61,16 @@ public class CartController {
 					String tmp1 = Base64.getEncoder().encodeToString(product.getImgage());
 					product.setBase64(tmp1);
 					product.setImgage(null);
+					
+					sum += product.getProductPrice() * cart.getQty();
+					
 				}
-				int sum = 0;
-				sum += product.getProductPrice();
-				model.addAttribute("sum",sum);
+				
+				
 			}
 			model.addAttribute("clists", clists);
-			
+			model.addAttribute("sum",sum);
+//			model.addAttribute("cart",cart2);
 		}
 
 		return "/cart/list";
@@ -76,4 +85,15 @@ public class CartController {
 		
 		return "/cart/list";
 	}
+	
+	@ResponseBody
+	@DeleteMapping("delete/{id}")
+	public String delete(@PathVariable int id) {
+		System.out.println("cart delete 실행");
+		cartService.delete(id);
+		
+		return "success";
+		
+	}
+	
 }

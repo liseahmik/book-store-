@@ -1,5 +1,7 @@
 package com.project.bookstore.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +31,9 @@ public class UserService {
 		userRepository.save(user);
 	}
 
+	// admin: 회원조회
+		public List<User> customerList(){
+			return userRepository.findAll();
+		}
+	
 }
