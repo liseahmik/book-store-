@@ -200,7 +200,7 @@ $("#btnJoin").click(function() {
 	.done(function(resp) {
 		if(resp == "success") {
 			alert("회원가입 성공 쿠폰이 지급되었습니다.");
-			location.href="/";
+			location.href="/login";
 		}else if (resp == "fail") {
 			alert("아이디 중복");
 			$("#username").val("");

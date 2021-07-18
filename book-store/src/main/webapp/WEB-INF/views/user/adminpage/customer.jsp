@@ -1,19 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../../includes/header.jsp"%>
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	</head>
 	
 	<body>	
 		<div class="container">
@@ -35,7 +26,7 @@
 					</tr>
 				</thead>
 				<tbody id="myTable">
-					<c:forEach items="${lists }" var="board">
+					<c:forEach items="${lists.content }" var="board">
 						<tr>
 							<td>${board.userNo }</td>
 							<td>${board.username }</td>
@@ -46,9 +37,24 @@
 							<td><fmt:formatDate value="${board.regdate }" pattern="yyyy-MM-dd"/></td>
 						</tr>
 					</c:forEach>
+					
 				</tbody>
 			</table>
+			<ul class="pagination justify-content-center" style="margin:20px 0">
+			  <li class="page-item"><a class="page-link" href="?page=${lists.number-1 }">Previous</a></li>
+			  
+			  <!-- 수정 필요 -->
+			  <li class="page-item active"><a class="page-link" href="?page=${lists.number }">${lists.number+1}</a></li>
+			  
+			  <li class="page-item"><a class="page-link" href="?page=${lists.number+1 }">Next</a></li>
+			</ul>
 			
+			<c:choose>
+				<c:when test="${lists.first }">
+				</c:when>
+				<c:when test="${lists.last }">
+				</c:when>
+			</c:choose>
 		</div>
 	
 	
