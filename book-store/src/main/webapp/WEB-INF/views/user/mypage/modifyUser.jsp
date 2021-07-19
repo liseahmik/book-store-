@@ -20,8 +20,6 @@
 			<span class="helper-text" id="idDupMessage">*아이디는 변경할 수 없습니다.</span>
 		</div>
 
-
-
 		<div class="form-group">
 			<label for="pwd">PW</label>
 			<input type="password" class="form-control" id="password" placeholder="변경할 비밀번호를 입력하세요." name="password">
@@ -72,7 +70,7 @@
 		}
 		$.ajax({
 			type: "PUT",
-			url: "/modifyUser/",
+			url: "/modifyUser/"+${user.userNo},
 			data: JSON.stringify(dataParam),
 			contentType:"application/json;charset=utf-8"
 		})

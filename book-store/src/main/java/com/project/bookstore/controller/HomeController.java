@@ -18,19 +18,7 @@ public class HomeController {
 	}
 
 	
-	//국내도서===============================
-		@GetMapping("domestic")
-		public String domestic() {
-			//...
-			return "domestic";	
-		}
-		
-	//해외도서===============================
-		@GetMapping("international")
-		public String international() {
-			//...
-			return "international";	
-		}
+
 	//Q & A==================================
 //		@GetMapping("qna")
 //		public String qna(Model model,
@@ -41,14 +29,6 @@ public class HomeController {
 //		}
 	
 
-	//장바구니 (로그인필요)==================================
-		@GetMapping("cart")
-		public String cart() {
-			//...
-			return "cart";	
-		}
-		
-	//회원가입 (비로그인)===============================
 		
 
 }

@@ -71,7 +71,7 @@ public class UserService {
 					});
 		}
 		
-// 회원수정
+// 회원수정==========================================
 		public void modify(User user) {
 			User user2 = userRepository.findById(user.getUserNo()).get();
 			user2.setPassword(user.getPassword());
