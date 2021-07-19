@@ -24,7 +24,7 @@
 			<div class="container">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
-				<li class="nav-item"><a class="nav-link" href="/product/list">test</a></li>
+<!-- 				<li class="nav-item"><a class="nav-link" href="/product/list">test</a></li> -->
 				<li class="nav-item"><a class="nav-link" href="/product/domestic">국내도서</a></li>
 				<li class="nav-item"><a class="nav-link" href="/product/international">해외도서</a></li>
 				<li class="nav-item"><a class="nav-link" href="/qna">Q & A</a></li>
