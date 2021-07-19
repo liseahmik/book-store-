@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../includes/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -200,10 +200,11 @@ $("#btnJoin").click(function() {
 	.done(function(resp) {
 		if(resp == "success") {
 			alert("회원가입 성공 쿠폰이 지급되었습니다.");
-			location.href="/login";
+			location.href="/";
 		}else if (resp == "fail") {
 			alert("아이디 중복");
 			$("#username").val("");
+			location.href="/login";
 		}
 			
 	})

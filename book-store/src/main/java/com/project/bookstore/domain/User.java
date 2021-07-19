@@ -11,8 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicUpdate;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -51,4 +52,11 @@ public class User {
 	
 	@OneToMany(mappedBy = "user")
 	private List<QnaBoard> qnaboars;
+
+	@Override
+	public String toString() {
+		return "User [userNo=" + userNo + ", couponNo=" + couponNo + "]";
+	}
+
+	
 }

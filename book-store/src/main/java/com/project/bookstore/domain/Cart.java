@@ -15,7 +15,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +27,8 @@ public class Cart {
 	private int qty;
 	@CreationTimestamp
 	private Date regdate;
+	
+	private int couponapply;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")

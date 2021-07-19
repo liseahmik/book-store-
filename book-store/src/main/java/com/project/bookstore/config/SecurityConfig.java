@@ -3,17 +3,12 @@ package com.project.bookstore.config;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationDetailsSource;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-
-import com.project.bookstore.config.auth.PrincipalDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -21,8 +16,7 @@ import com.project.bookstore.config.auth.PrincipalDetailsService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	CustomAuthenticationFailureHandler customFailureHandler = new CustomAuthenticationFailureHandler();
-
-
+	
 	@Bean
 	public BCryptPasswordEncoder encodePwd() {
 		return new BCryptPasswordEncoder();
@@ -34,7 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable();
 		http.authorizeRequests()
 			.antMatchers("/adminpage/**").hasAuthority("ROLE_ADMIN")
+			.antMatchers("/product/insert").hasAuthority("ROLE_ADMIN")
 			.antMatchers("/mypage/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+			
 			.antMatchers("/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
@@ -48,18 +44,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.logoutUrl("/logout")
 				.logoutSuccessUrl("/")
 				.invalidateHttpSession(true);
+		
 	}
-	
+
 	@Override
     // 정적리소스는 권한에 상관없게 설정.
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
+	
+	
 }
-
-
-
 
 
 

@@ -31,7 +31,6 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 
-
 		<!-- 시큐리티 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.bookstore.domain.User;
+import com.project.bookstore.repository.CartRepository;
 import com.project.bookstore.repository.UserRepository;
 
 @Service
@@ -23,18 +24,10 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	
-// Q & A 게시판====================================
-//	public List<User> qnaList(){
-//		return userRepository.findAll();
-//	}
-//	// 페이징 전체보기
-//	public Page<User> qnaList(Pageable pageable){
-//		return userRepository.findAll(pageable);
-//	}
+	@Autowired
+	private CartRepository cartRepository;
 	
 	
-// 회원가입========================================
 	public void registerUser(User user) {
 		String rawPassword = user.getPassword();
 		String encPassword = encoder.encode(rawPassword);
@@ -45,41 +38,58 @@ public class UserService {
 	}
 
 
-	
-// 회원탈퇴==========================================
-		public void delete(int userNo) {
-			userRepository.deleteById(userNo);
-		}
-	
-	
-// 회원전체조회======================================
+	// admin: 회원조회
 		public List<User> customerList(){
 			return userRepository.findAll();
 		}
-		
-		// 페이징 전체보기-----------------
-		public Page<User> customerList(Pageable pageable){
-			return userRepository.findAll(pageable);
-		}
 
-		
-// 회원개인조회======================================
-		public User findByUserNo(int userNo) {
-			return userRepository.findById(userNo)
-					.orElseThrow(()->{
-						return new IllegalArgumentException("상세보기 실패");
-					});
-		}
-		
-// 회원수정
-		public void modify(User user) {
-			User user2 = userRepository.findById(user.getUserNo()).get();
-			user2.setPassword(user.getPassword());
-			user2.setPhone(user.getPhone());
-			user2.setEmail(user.getEmail());
-			user2.setAddr(user.getAddr());
-			
-		}
 
+
+
+		// 회원탈퇴==========================================
+				public void delete(int userNo) {
+					userRepository.deleteById(userNo);
+				}
+
+
+				// 페이징 전체보기-----------------
+				public Page<User> customerList(Pageable pageable){
+					return userRepository.findAll(pageable);
+				}
+
+
+		// 회원개인조회======================================
+				public User findByUserNo(int userNo) {
+					return userRepository.findById(userNo)
+							.orElseThrow(()->{
+								return new IllegalArgumentException("상세보기 실패");
+							});
+				}
+
+		// 회원수정
+				public void modify(User user) {
+					User user2 = userRepository.findById(user.getUserNo()).get();
+					user2.setPassword(user.getPassword());
+					user2.setPhone(user.getPhone());
+					user2.setEmail(user.getEmail());
+					user2.setAddr(user.getAddr());
+
+				}
+				//쿠폰 적용
+				public void updateCoupon(User user) {
+					User u = userRepository.findById(user.getUserNo()).get();
+					System.out.println("u1 : " +u);
+					u.setCouponNo(u.getCouponNo()-1);
+					System.out.println("u2 : "+u);
+					
+//					cartRepository.findByUser_userNo(u.getUserNo());
+				}
+				//쿠폰 취소
+				public void backCoupon(User user) {
+					User u = userRepository.findById(user.getUserNo()).get();
+					u.setCouponNo(u.getCouponNo()+1);
+					
+				}
+		
 
 }
