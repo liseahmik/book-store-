@@ -27,7 +27,7 @@
 <!-- 				<li class="nav-item"><a class="nav-link" href="/product/list">test</a></li> -->
 				<li class="nav-item"><a class="nav-link" href="/product/domestic">국내도서</a></li>
 				<li class="nav-item"><a class="nav-link" href="/product/international">해외도서</a></li>
-				<li class="nav-item"><a class="nav-link" href="/qna">Q & A</a></li>
+				<li class="nav-item"><a class="nav-link" href="/qna/list">Q & A</a></li>
 				<li class="nav-item"><a class="nav-link" href="/cart/cartlist">장바구니</a></li>
 				<li class="nav-item"><a class="nav-link" href="/product/insert">상품등록</a></li>
 				<sec:authorize access="isAnonymous()">
@@ -49,7 +49,7 @@
           			<a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">마이페이지</a>
 	         			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				            <a class="dropdown-item" href="/mypage/modifyUser/${principal.user.userNo }">내정보수정</a>
-				            <a class="dropdown-item" href="/mypage/myOrder">내주문보기</a>
+				            <!-- <a class="dropdown-item" href="/mypage/myOrder">내주문보기</a> -->
 				            <a class="dropdown-item" href="/mypage/deleteAccount">회원탈퇴하기</a>
 				        </div>
         		</li>
@@ -63,7 +63,7 @@
           			<a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">관리자페이지</a>
 	         			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				            <a class="dropdown-item" href="/adminpage/customer">회원관리</a>
-				            <a class="dropdown-item" href="/adminpage/orderList">주문관리</a>
+				            <!-- <a class="dropdown-item" href="/adminpage/orderList">주문관리</a> -->
 				        </div>
         		</li>
         		</sec:authorize>		

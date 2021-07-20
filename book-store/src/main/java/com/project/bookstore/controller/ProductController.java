@@ -52,28 +52,6 @@ public class ProductController {
 		return "redirect:list";
 	}
 	
-	@GetMapping("list")
-	public String list(Model model,
-			@PageableDefault(size = 5, sort = "productNo",
-			direction = Sort.Direction.DESC) Pageable pageable) {
-		
-//		List<Product> lists = productService.list();
-//		Long count = bservice.count();
-		Page<Product> lists = productService.list(pageable);
-		
-		for(Product product : lists) {
-		
-			if(product.getImgage() != null) {
-				String tmp = Base64.getEncoder().encodeToString(product.getImgage());
-				product.setBase64(tmp);
-				product.setImgage(null);
-			}
-		}
-		model.addAttribute("lists",lists);
-		model.addAttribute("rowNo", productService.count()-(lists.getNumber()*5)) ; 
-		
-		return "/product/list";
-	}
 	
 	@GetMapping("select")
 	public String select(Model model,

@@ -28,6 +28,7 @@ public class QnaBoard {
 	private Date qnaDate;
 	private String qnaStatus;
 	private String qnaProduct;
+	private String title;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")

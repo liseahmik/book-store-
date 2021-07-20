@@ -39,7 +39,7 @@
 			<input type="password" class="form-control" id="password2" placeholder="Enter password" name="password2">
 		</div>
 		
-		<p id="pwCheckF" style="color: #FF6600; margin: 0;"></p>
+		<p id="pwCheckF" style="color: #FF6600; margin: 0;">ss</p>
 		<p id="pwCheckFF" style="color: #FF6600; margin: 0;"></p>
 		
 		<div class="form-group">

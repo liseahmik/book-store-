@@ -27,10 +27,7 @@ public class HomeController {
 	private ProductService productService;
 	
 	
-//	@GetMapping("/")
-//	public String home() {
-//		return "home";
-//	}
+
 	
 	@GetMapping("/")
 	public String list(Model model,
@@ -56,13 +53,7 @@ public class HomeController {
 	}
 
 	
-//	@GetMapping("qna")
-//	public String qna(Model model,
-//			@PageableDefault(size = 3, sort = "userNo", direction = Sort.Direction.DESC) Pageable pageable) {
-//		Page<User> lists = userService.qnaList(pageable);
-//		model.addAttribute("lists", lists);
-//		return "qna";
-//	}
+
 
 	//장바구니 (로그인필요)==================================
 		@GetMapping("cart")
@@ -71,7 +62,6 @@ public class HomeController {
 			return "cart";	
 		}
 		
-	//회원가입 (비로그인)===============================
-		
+
 
 }

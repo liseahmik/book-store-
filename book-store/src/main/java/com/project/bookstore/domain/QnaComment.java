@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -20,9 +24,11 @@ public class QnaComment {
 	private int qnacomNo;
 	
 	private String content;
+	@CreationTimestamp
 	private Date qnacomDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "qna_id")
+	@JsonIgnore
 	private QnaBoard qnaboard;
 }
