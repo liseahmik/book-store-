@@ -3,6 +3,7 @@ package com.project.bookstore.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,6 @@ public class QnaBoard {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy = "qnaboard")
+	@OneToMany(mappedBy = "qnaboard",cascade = CascadeType.ALL) //댓글이 있으면 cacasde옵션 써줘야됨!
 	private List<QnaComment> qnacomments;
 }

@@ -49,7 +49,7 @@ public class ProductController {
 		System.out.println(product.getImgage());
 		
 		productService.insert(product);		
-		return "redirect:list";
+		return "redirect:/";
 	}
 	
 	

@@ -145,9 +145,7 @@ public class UserController {
 		
 		System.out.println("쿠폰적용버튼 실행");
 		User user = principal.getUser();
-		System.out.println("쿠폰개수"+user.getCouponNo());
 		userservice.updateCoupon(user);
-		System.out.println("쿠폰개수"+user.getCouponNo());
 		
 		return "success";
 	}

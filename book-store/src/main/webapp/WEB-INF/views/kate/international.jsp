@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-	<h1>List</h1>
+	<h1>외국도서</h1>
 <div class="form-group text-right">
 
 		<a href="/product/insert">
